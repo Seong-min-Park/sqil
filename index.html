@@ -32,6 +32,39 @@
       <li>State importance via perturbation saliency</li>
       <li>Robust generalization across simulation and real-world tasks</li>
     </ul>
+  <section class="grid-section">
+    <h2>LIBERO-Long Task: put the black bowl in the drawer</h2>
+    <div class="video-grid">
+      <div class="item">
+        <h3>Baseline FP</h3>
+        <video controls width="100%">
+          <source src="assets/fp.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+      <div class="item">
+        <h3>PTQ W4</h3>
+        <video controls width="100%">
+          <source src="assets/ptq.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed to put into the drawer</p>
+      </div>
+      <div class="item">
+        <h3>QAT W4</h3>
+        <video controls width="100%">
+          <source src="assets/qat.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed to put the bowl upright into the drawer</p>
+      </div>
+      <div class="item">
+        <h3>SQIL W4 (Ours)</h3>
+        <video controls width="100%">
+          <source src="assets/sqil.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+    </div>
+  </section>
 
     <h2>Demo Video</h2>
     <video controls width="100%">
