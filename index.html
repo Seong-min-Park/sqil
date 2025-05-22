@@ -23,7 +23,7 @@
 
   <section class="content">
     <h2>Abstract</h2>
-    <p>SQIL is a quantization-aware imitation learning method that selectively emphasizes mission-critical states using a perturbation-based saliency signal. This enables low-bit policies to maintain performance in critical decision regions under extreme quantization.</p>
+    <p>Deep neural network (DNN)-based policy models, such as vision-language-action (VLA) models, excel at automating complex decision-making from multi-modal inputs. However, scaling these models greatly increases computational overhead, complicating deployment in resource-constrained settings like robot manipulation and autonomous driving. To address this, we propose Saliency-Aware Quantized Imitation Learning (\method), which combines quantization-aware training with a selective loss-weighting strategy for mission-critical states. By identifying these states via saliency scores and emphasizing them in the training loss, \method preserves decision fidelity under low-bit precision. We validate \method's generalization capability across extensive simulation benchmarks with environment variations, real-world tasks, and cross-domain tasks (self-driving, physics simulation), consistently recovering full-precision performance. Notably, a 4-bit weight-quantized VLA model for robotic manipulation achieves up to 2.5$\times$ speedup and 2.5$\times$ energy savings on an edge GPU with minimal accuracy loss. These results underline \method’s potential for efficiently deploying large IL-based policy models on resource-limited devices.</p>
 
     <h2>Highlights</h2>
     <ul>
