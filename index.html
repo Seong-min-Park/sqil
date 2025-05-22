@@ -7,38 +7,39 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="container">
-    <h1>SQIL: Saliency-aware Quantized Imitation Learning</h1>
-    <p><strong>Under review at ICCV 2025</strong></p>
-
-    <p>
+  <header class="header">
+    <h1>SQIL</h1>
+    <h3>Saliency-aware Quantized Imitation Learning</h3>
+    <p><strong>Under Review at ICCV 2025</strong></p>
+    <p class="links">
       <a href="https://arxiv.org/abs/xxxx.xxxxx">[Paper]</a>
       <a href="https://github.com/your-org/sqil">[Code]</a>
       <a href="assets/demo.mp4">[Video]</a>
-      <a href="#bibtex">[BibTeX]</a>
     </p>
+  </header>
 
-    <img src="assets/teaser.png" alt="Teaser Image" style="width: 100%; max-width: 800px;">
+  <section class="teaser">
+    <img src="assets/teaser.png" alt="Teaser Image">
+  </section>
 
+  <section class="content">
     <h2>Abstract</h2>
-    <p>
-     Deep neural network (DNN)-based policy models like vision-language-action (VLA) models are transformative in automating complex decision-making across applications by interpreting multi-modal data. However, scaling these models greatly increases computational costs, which presents challenges in fields like robot manipulation and autonomous driving that require quick, accurate responses. To address the need for deployment on resource-limited hardware, we propose a new quantization framework for IL-based policy models that fine-tunes parameters to enhance robustness against low-bit precision errors during training, thereby maintaining efficiency and reliability under constrained conditions. Our evaluations with representative robot manipulation for 4-bit weight-quantization on a real edge GPU demonstrate that our framework achieves up to 2.5$\times$ speedup and 2.5$\times$ energy savings while preserving accuracy. For 4-bit weight and activation quantized self-driving models, the framework achieves up to 3.7$\times$ speedup and 3.1$\times$ energy saving on a low-end GPU. These results highlight the practical potential of deploying IL-based policy models on resource-constrained devices.
-    </p>
+    <p>SQIL is a quantization-aware imitation learning method that selectively emphasizes mission-critical states using a perturbation-based saliency signal. This enables low-bit policies to maintain performance in critical decision regions under extreme quantization.</p>
 
     <h2>Highlights</h2>
     <ul>
-      <li>State importance identified via policy perturbation</li>
-      <li>4-bit quantization with minimal performance loss</li>
-      <li>Cross-domain generalization (simulation ↔ real-world)</li>
+      <li>4-bit policy with minimal accuracy drop</li>
+      <li>State importance via perturbation saliency</li>
+      <li>Robust generalization across simulation and real-world tasks</li>
     </ul>
 
-    <h2>Video</h2>
-    <video controls width="720">
+    <h2>Demo Video</h2>
+    <video controls width="100%">
       <source src="assets/demo.mp4" type="video/mp4">
       Your browser does not support the video tag.
     </video>
 
-    <h2 id="bibtex">BibTeX</h2>
+    <h2>BibTeX</h2>
     <pre>
 @inproceedings{park2025sqil,
   title={Saliency-aware Quantized Imitation Learning},
@@ -47,6 +48,10 @@
   year={2025}
 }
     </pre>
-  </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Seongmin Park, VLA Lab</p>
+  </footer>
 </body>
 </html>
