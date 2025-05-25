@@ -5,62 +5,42 @@
   <title>SQIL: Saliency-aware Quantized Imitation Learning</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5em;
-      margin-top: 1em;
-    }
-    .item {
-      text-align: center;
-    }
-    .caption {
-      margin-top: 0.5em;
-      padding: 0.4em;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-    .caption.success {
-      background-color: #fef2e0;
-      color: green;
-    }
-    .caption.fail {
-      background-color: #fdeaea;
-      color: red;
-    }
-    .rollout-section {
+    .slider {
+      position: relative;
+      overflow: hidden;
       margin-top: 3em;
     }
-    .rollout-section h2 {
-      border-bottom: 2px solid #ddd;
-      padding-bottom: 0.3em;
+    .slider-track {
+      display: flex;
+      transition: transform 0.5s ease;
     }
-    .task-navigation {
-      text-align: center;
-      margin: 1em 0;
+    .slide {
+      min-width: 100%;
+      display: flex;
+      justify-content: space-around;
+      gap: 1em;
+      padding: 1em 0;
     }
-    .task-navigation button {
-      padding: 5px 12px;
-      margin: 0 10px;
+    .slide video {
+      width: 22%;
+      border: 1px solid #ccc;
+    }
+    .slider-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255, 255, 255, 0.8);
+      border: none;
+      font-size: 2em;
       cursor: pointer;
     }
-    .image-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 2em;
-      margin-top: 1em;
-    }
-    .autonomous-driving {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      align-items: center;
-      margin-top: 2em;
-    }
-    .autonomous-driving img {
-      width: 100%;
-      max-width: 900px;
-      border: 1px solid #ccc;
+    .slider-nav.left { left: 10px; }
+    .slider-nav.right { right: 10px; }
+    .task-title {
+      text-align: center;
+      font-weight: bold;
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
     }
   </style>
 </head>
@@ -91,39 +71,65 @@
       <li>Robust generalization across simulation and real-world tasks</li>
     </ul>
 
-    <div class="rollout-section">
-      <h2>Rollout Video</h2>
+    <h2>Rollout Video</h2>
 
-      <h3>Real-World Robot Manipulation</h3>
-      <div class="task-navigation">
-        <button onclick="showTask('real1')">Task 1</button>
-        <button onclick="showTask('real2')">Task 2</button>
+    <h3>Real-World Robot Manipulation</h3>
+    <div class="slider">
+      <div class="task-title" id="real-title">Task: Stack purple cup on green cup</div>
+      <button class="slider-nav left" onclick="slideReal(-1)">&#8592;</button>
+      <button class="slider-nav right" onclick="slideReal(1)">&#8594;</button>
+      <div class="slider-track" id="real-slider">
+        <div class="slide">
+          <video src="assets/real1_fp.mp4" autoplay muted loop></video>
+          <video src="assets/real1_ptq.mp4" autoplay muted loop></video>
+          <video src="assets/real1_sqil.mp4" autoplay muted loop></video>
+        </div>
+        <div class="slide">
+          <video src="assets/real2_fp.mp4" autoplay muted loop></video>
+          <video src="assets/real2_ptq.mp4" autoplay muted loop></video>
+          <video src="assets/real2_sqil.mp4" autoplay muted loop></video>
+        </div>
       </div>
-      <div id="real1" class="video-grid">
-        <div class="item"><h4>Baseline FP</h4><video src="assets/real1_fp.mp4" autoplay muted loop></video><p class="caption success">Success</p></div>
-        <div class="item"><h4>PTQ W4</h4><video src="assets/real1_ptq.mp4" autoplay muted loop></video><p class="caption fail">Failed</p></div>
-        <div class="item"><h4>SQIL W4</h4><video src="assets/real1_sqil.mp4" autoplay muted loop></video><p class="caption success">Success</p></div>
-      </div>
-      <div id="real2" class="video-grid" style="display:none">
-        <div class="item"><h4>Baseline FP</h4><video src="assets/real2_fp.mp4" autoplay muted loop></video><p class="caption success">Success</p></div>
-        <div class="item"><h4>PTQ W4</h4><video src="assets/real2_ptq.mp4" autoplay muted loop></video><p class="caption fail">Failed</p></div>
-        <div class="item"><h4>SQIL W4</h4><video src="assets/real2_sqil.mp4" autoplay muted loop></video><p class="caption success">Success</p></div>
-      </div>
+    </div>
 
-      <h3>Simulation-based Robot Manipulation (LIBERO)</h3>
-      <div class="image-grid">
-        <img src="assets/libero_spatial.png" alt="Spatial">
-        <img src="assets/libero_object.png" alt="Object">
-        <img src="assets/libero_goal.png" alt="Goal">
-        <img src="assets/libero_long.png" alt="Long">
+    <h3>Simulation-based Robot Manipulation (LIBERO)</h3>
+    <div class="slider">
+      <div class="task-title" id="sim-title">Task: Spatial</div>
+      <button class="slider-nav left" onclick="slideSim(-1)">&#8592;</button>
+      <button class="slider-nav right" onclick="slideSim(1)">&#8594;</button>
+      <div class="slider-track" id="sim-slider">
+        <div class="slide">
+          <video src="assets/spatial_fp.mp4" autoplay muted loop></video>
+          <video src="assets/spatial_ptq.mp4" autoplay muted loop></video>
+          <video src="assets/spatial_qat.mp4" autoplay muted loop></video>
+          <video src="assets/spatial_sqil.mp4" autoplay muted loop></video>
+        </div>
+        <div class="slide">
+          <video src="assets/object_fp.mp4" autoplay muted loop></video>
+          <video src="assets/object_ptq.mp4" autoplay muted loop></video>
+          <video src="assets/object_qat.mp4" autoplay muted loop></video>
+          <video src="assets/object_sqil.mp4" autoplay muted loop></video>
+        </div>
+        <div class="slide">
+          <video src="assets/goal_fp.mp4" autoplay muted loop></video>
+          <video src="assets/goal_ptq.mp4" autoplay muted loop></video>
+          <video src="assets/goal_qat.mp4" autoplay muted loop></video>
+          <video src="assets/goal_sqil.mp4" autoplay muted loop></video>
+        </div>
+        <div class="slide">
+          <video src="assets/long_fp.mp4" autoplay muted loop></video>
+          <video src="assets/long_ptq.mp4" autoplay muted loop></video>
+          <video src="assets/long_qat.mp4" autoplay muted loop></video>
+          <video src="assets/long_sqil.mp4" autoplay muted loop></video>
+        </div>
       </div>
+    </div>
 
-      <h3>Autonomous Driving</h3>
-      <div class="autonomous-driving">
-        <img src="assets/driving_baseline.png" alt="Driving Baseline">
-        <img src="assets/driving_qat.png" alt="Driving QAT">
-        <img src="assets/driving_sqil.png" alt="Driving SQIL">
-      </div>
+    <h3>Autonomous Driving</h3>
+    <div class="autonomous-driving">
+      <img src="assets/driving_baseline.png" alt="Driving Baseline">
+      <img src="assets/driving_qat.png" alt="Driving QAT">
+      <img src="assets/driving_sqil.png" alt="Driving SQIL">
     </div>
 
     <h2>Demo Video</h2>
@@ -148,10 +154,20 @@
   </footer>
 
   <script>
-    function showTask(id) {
-      document.getElementById('real1').style.display = 'none';
-      document.getElementById('real2').style.display = 'none';
-      document.getElementById(id).style.display = 'grid';
+    const realTitles = ["Task: Stack purple cup on green cup", "Task: Put eggplant into pot"];
+    let realIndex = 0;
+    function slideReal(dir) {
+      realIndex = Math.max(0, Math.min(1, realIndex + dir));
+      document.getElementById('real-slider').style.transform = `translateX(-${100 * realIndex}%)`;
+      document.getElementById('real-title').textContent = realTitles[realIndex];
+    }
+
+    const simTitles = ["Task: Spatial", "Task: Object", "Task: Goal", "Task: Long"];
+    let simIndex = 0;
+    function slideSim(dir) {
+      simIndex = Math.max(0, Math.min(3, simIndex + dir));
+      document.getElementById('sim-slider').style.transform = `translateX(-${100 * simIndex}%)`;
+      document.getElementById('sim-title').textContent = simTitles[simIndex];
     }
   </script>
 </body>
