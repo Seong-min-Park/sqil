@@ -4,60 +4,60 @@
   <meta charset="UTF-8">
   <title>SQIL: Saliency-aware Quantized Imitation Learning</title>
   <link rel="stylesheet" href="css/style.css">
-  <style>
-    .video-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 1.5em;
-      margin-top: 1em;
-    }
-    .item {
-      text-align: center;
-    }
-    .caption {
-      margin-top: 0.5em;
-      padding: 0.4em;
-      border-radius: 8px;
-      font-weight: bold;
-    }
-    .caption.success {
-      background-color: #fef2e0;
-      color: green;
-    }
-    .caption.fail {
-      background-color: #fdeaea;
-      color: red;
-    }
-  </style>
 </head>
 <body>
+  <header class="header">
+    <h1>SQIL:</h1>
+    <h2>Saliency-aware Quantized Imitation Learning</h2>
+    <p><strong>Under Review at ICCV 2025</strong></p>
+    <p class="links">
+      <a href="https://arxiv.org/abs/2505.15304">[Paper]</a>
+      <a href="https://github.com/your-org/sqil">[Code]</a>
+      <a href="assets/demo.mp4">[Video]</a>
+    </p>
+  </header>
+
+  <section class="teaser">
+    <img src="assets/fig_1.PNG" alt="Teaser Image">
+  </section>
+
+  <section class="content">
+    <h2>Abstract</h2>
+    <p>Deep neural network (DNN)-based policy models, such as vision-language-action (VLA) models, excel at automating complex decision-making from multi-modal inputs. However, scaling these models greatly increases computational overhead, complicating deployment in resource-constrained settings like robot manipulation and autonomous driving. To address this, we propose Saliency-Aware Quantized Imitation Learning (SQIL), which combines quantization-aware training with a selective loss-weighting strategy for mission-critical states. By identifying these states via saliency scores and emphasizing them in the training loss, SQIL preserves decision fidelity under low-bit precision. We validate SQIL's generalization capability across extensive simulation benchmarks with environment variations, real-world tasks, and cross-domain tasks (self-driving, physics simulation), consistently recovering full-precision performance. Notably, a 4-bit weight-quantized VLA model for robotic manipulation achieves up to 2.5x speedup and 2.5x energy savings on an edge GPU with minimal accuracy loss. These results underline SQIL’s potential for efficiently deploying large IL-based policy models on resource-limited devices.</p>
+
+    <h2>Highlights</h2>
+    <ul>
+      <li>4-bit policy with minimal accuracy drop</li>
+      <li>State importance via perturbation saliency</li>
+      <li>Robust generalization across simulation and real-world tasks</li>
+    </ul>
   <section class="grid-section">
-    <h2>LIBERO-Long Task: put the black bowl in the drawer</h2>
+    <h2>Task: put the black bowl in the drawer</h2>
     <div class="video-grid">
       <div class="item">
         <h3>Baseline FP</h3>
-        <video controls width="100%">
+        <video autoplay muted loop playsinline width="100%">
           <source src="assets/fp.mp4" type="video/mp4">
         </video>
         <p class="caption success">Success</p>
       </div>
       <div class="item">
         <h3>PTQ W4</h3>
-        <video controls width="100%">
+        <video autoplay muted loop playsinline width="100%">
           <source src="assets/ptq.mp4" type="video/mp4">
         </video>
         <p class="caption fail">Failed to put into the drawer</p>
       </div>
       <div class="item">
         <h3>QAT W4</h3>
-        <video controls width="100%">
+        <video autoplay muted loop playsinline width="100%">
           <source src="assets/qat.mp4" type="video/mp4">
         </video>
         <p class="caption fail">Failed to put the bowl upright into the drawer</p>
       </div>
       <div class="item">
         <h3>SQIL W4 (Ours)</h3>
-        <video controls width="100%">
+        <video autoplay muted loop playsinline width="100%">
           <source src="assets/sqil.mp4" type="video/mp4">
         </video>
         <p class="caption success">Success</p>
@@ -65,104 +65,25 @@
     </div>
   </section>
 
-  <section class="grid-section">
-    <h2>LIBERO-Spatial Task: pick up the black bowl and place on plate</h2>
-    <div class="video-grid">
-      <div class="item">
-        <h3>Baseline FP</h3>
-        <video controls width="100%">
-          <source src="assets/spatial_fp.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
-      </div>
-      <div class="item">
-        <h3>PTQ W4</h3>
-        <video controls width="100%">
-          <source src="assets/spatial_ptq.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed to find the black bowl</p>
-      </div>
-      <div class="item">
-        <h3>QAT W4</h3>
-        <video controls width="100%">
-          <source src="assets/spatial_qat.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed to pick up the black bowl</p>
-      </div>
-      <div class="item">
-        <h3>SQIL W4 (Ours)</h3>
-        <video controls width="100%">
-          <source src="assets/spatial_sqil.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
-      </div>
-    </div>
+    <h2>Demo Video</h2>
+    <video controls width="100%">
+      <source src="assets/demo.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+
+    <h2>BibTeX</h2>
+    <pre>
+@inproceedings{park2025sqil,
+  title={Saliency-aware Quantized Imitation Learning},
+  author={Park, Seongmin and ...},
+  booktitle={ICCV},
+  year={2025}
+}
+    </pre>
   </section>
 
-  <section class="grid-section">
-    <h2>LIBERO-Object Task: pick up cream cheese and place in basket</h2>
-    <div class="video-grid">
-      <div class="item">
-        <h3>Baseline FP</h3>
-        <video controls width="100%">
-          <source src="assets/object_fp.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
-      </div>
-      <div class="item">
-        <h3>PTQ W4</h3>
-        <video controls width="100%">
-          <source src="assets/object_ptq.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed due to no attempt to pick up the cream cheese</p>
-      </div>
-      <div class="item">
-        <h3>QAT W4</h3>
-        <video controls width="100%">
-          <source src="assets/object_qat.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed to pick up the cream cheese precisely</p>
-      </div>
-      <div class="item">
-        <h3>SQIL W4 (Ours)</h3>
-        <video controls width="100%">
-          <source src="assets/object_sqil.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
-      </div>
-    </div>
-  </section>
-
-  <section class="grid-section">
-    <h2>LIBERO-Goal Task: push plate to the front of the stove</h2>
-    <div class="video-grid">
-      <div class="item">
-        <h3>Baseline FP</h3>
-        <video controls width="100%">
-          <source src="assets/goal_fp.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
-      </div>
-      <div class="item">
-        <h3>PTQ W4</h3>
-        <video controls width="100%">
-          <source src="assets/goal_ptq.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed due to inaccurate push control</p>
-      </div>
-      <div class="item">
-        <h3>QAT W4</h3>
-        <video controls width="100%">
-          <source src="assets/goal_qat.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed due to collision with cream cheese</p>
-      </div>
-      <div class="item">
-        <h3>SQIL W4 (Ours)</h3>
-        <video controls width="100%">
-          <source src="assets/goal_sqil.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
-      </div>
-    </div>
-  </section>
+  <footer>
+    <p>&copy; 2025 Seongmin Park, VLA Lab</p>
+  </footer>
+</body>
+</html>
