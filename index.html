@@ -1,10 +1,68 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>SQIL: Saliency-aware Quantized Imitation Learning</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5em;
+      margin-top: 1em;
+    }
+    .item {
+      text-align: center;
+    }
+    .caption {
+      margin-top: 0.5em;
+      padding: 0.4em;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .caption.success {
+      background-color: #fef2e0;
+      color: green;
+    }
+    .caption.fail {
+      background-color: #fdeaea;
+      color: red;
+    }
+    .rollout-section {
+      margin-top: 3em;
+    }
+    .rollout-section h2 {
+      border-bottom: 2px solid #ddd;
+      padding-bottom: 0.3em;
+    }
+    .task-navigation {
+      text-align: center;
+      margin: 1em 0;
+    }
+    .task-navigation button {
+      padding: 5px 12px;
+      margin: 0 10px;
+      cursor: pointer;
+    }
+    .image-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2em;
+      margin-top: 1em;
+    }
+    .autonomous-driving {
+      display: flex;
+      flex-direction: column;
+      gap: 1em;
+      align-items: center;
+      margin-top: 2em;
+    }
+    .autonomous-driving img {
+      width: 100%;
+      max-width: 900px;
+      border: 1px solid #ccc;
+    }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -32,39 +90,41 @@
       <li>State importance via perturbation saliency</li>
       <li>Robust generalization across simulation and real-world tasks</li>
     </ul>
-  <section class="grid-section">
-    <h2>Task: put the black bowl in the drawer</h2>
-    <div class="video-grid">
-      <div class="item">
-        <h3>Baseline FP</h3>
-        <video autoplay muted loop playsinline width="100%">
-          <source src="assets/fp.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
+
+    <div class="rollout-section">
+      <h2>Rollout Video</h2>
+
+      <h3>Real-World Robot Manipulation</h3>
+      <div class="task-navigation">
+        <button onclick="showTask('real1')">Task 1</button>
+        <button onclick="showTask('real2')">Task 2</button>
       </div>
-      <div class="item">
-        <h3>PTQ W4</h3>
-        <video autoplay muted loop playsinline width="100%">
-          <source src="assets/ptq.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed to put into the drawer</p>
+      <div id="real1" class="video-grid">
+        <div class="item"><h4>Baseline FP</h4><video src="assets/real1_fp.mp4" autoplay muted loop></video><p class="caption success">Success</p></div>
+        <div class="item"><h4>PTQ W4</h4><video src="assets/real1_ptq.mp4" autoplay muted loop></video><p class="caption fail">Failed</p></div>
+        <div class="item"><h4>SQIL W4</h4><video src="assets/real1_sqil.mp4" autoplay muted loop></video><p class="caption success">Success</p></div>
       </div>
-      <div class="item">
-        <h3>QAT W4</h3>
-        <video autoplay muted loop playsinline width="100%">
-          <source src="assets/qat.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed to put the bowl upright into the drawer</p>
+      <div id="real2" class="video-grid" style="display:none">
+        <div class="item"><h4>Baseline FP</h4><video src="assets/real2_fp.mp4" autoplay muted loop></video><p class="caption success">Success</p></div>
+        <div class="item"><h4>PTQ W4</h4><video src="assets/real2_ptq.mp4" autoplay muted loop></video><p class="caption fail">Failed</p></div>
+        <div class="item"><h4>SQIL W4</h4><video src="assets/real2_sqil.mp4" autoplay muted loop></video><p class="caption success">Success</p></div>
       </div>
-      <div class="item">
-        <h3>SQIL W4 (Ours)</h3>
-        <video autoplay muted loop playsinline width="100%">
-          <source src="assets/sqil.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
+
+      <h3>Simulation-based Robot Manipulation (LIBERO)</h3>
+      <div class="image-grid">
+        <img src="assets/libero_spatial.png" alt="Spatial">
+        <img src="assets/libero_object.png" alt="Object">
+        <img src="assets/libero_goal.png" alt="Goal">
+        <img src="assets/libero_long.png" alt="Long">
+      </div>
+
+      <h3>Autonomous Driving</h3>
+      <div class="autonomous-driving">
+        <img src="assets/driving_baseline.png" alt="Driving Baseline">
+        <img src="assets/driving_qat.png" alt="Driving QAT">
+        <img src="assets/driving_sqil.png" alt="Driving SQIL">
       </div>
     </div>
-  </section>
 
     <h2>Demo Video</h2>
     <video controls width="100%">
@@ -86,5 +146,13 @@
   <footer>
     <p>&copy; 2025 Seongmin Park, VLA Lab</p>
   </footer>
+
+  <script>
+    function showTask(id) {
+      document.getElementById('real1').style.display = 'none';
+      document.getElementById('real2').style.display = 'none';
+      document.getElementById(id).style.display = 'grid';
+    }
+  </script>
 </body>
 </html>
