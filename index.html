@@ -5,181 +5,164 @@
   <title>SQIL: Saliency-aware Quantized Imitation Learning</title>
   <link rel="stylesheet" href="css/style.css">
   <style>
-    .slider {
-      position: relative;
-      overflow: hidden;
-      margin-top: 3em;
-    }
-    .slider-track {
-      display: flex;
-      transition: transform 0.5s ease;
-    }
-    .slide {
-      min-width: 100%;
-    }
-    .task-header {
-      background-color: #d7f0ff;
-      padding: 0.6em;
-      font-weight: bold;
-      font-size: 1.1em;
-      margin-bottom: 1em;
-      text-align: center;
-    }
-    .result-grid {
-      display: flex;
-      justify-content: space-around;
-      gap: 1em;
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5em;
+      margin-top: 1em;
     }
     .item {
       text-align: center;
-      flex: 1;
     }
-    .item video {
-      width: 100%;
-      max-width: 300px;
-      border: 1px solid #ccc;
-    }
-    .result {
+    .caption {
       margin-top: 0.5em;
-      padding: 0.6em;
-      border-radius: 10px;
-      font-size: 1em;
+      padding: 0.4em;
+      border-radius: 8px;
       font-weight: bold;
     }
-    .result.success {
-      background-color: #fcecdc;
-      color: #333;
+    .caption.success {
+      background-color: #fef2e0;
+      color: green;
     }
-    .result.fail {
+    .caption.fail {
       background-color: #fdeaea;
       color: red;
-    }
-    .slider-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(255, 255, 255, 0.8);
-      border: none;
-      font-size: 2em;
-      cursor: pointer;
-    }
-    .slider-nav.left { left: 10px; }
-    .slider-nav.right { right: 10px; }
-    .autonomous-driving {
-      display: flex;
-      flex-direction: column;
-      gap: 1em;
-      align-items: center;
-      margin-top: 2em;
-    }
-    .autonomous-driving img {
-      width: 100%;
-      max-width: 900px;
-      border: 1px solid #ccc;
     }
   </style>
 </head>
 <body>
-  <header class="header">
-    <h1>SQIL:</h1>
-    <h2>Saliency-aware Quantized Imitation Learning</h2>
-    <p><strong>Under Review at ICCV 2025</strong></p>
-    <p class="links">
-      <a href="https://arxiv.org/abs/2505.15304">[Paper]</a>
-      <a href="https://github.com/your-org/sqil">[Code]</a>
-      <a href="assets/demo.mp4">[Video]</a>
-    </p>
-  </header>
-
-  <section class="teaser">
-    <img src="assets/fig_1.PNG" alt="Teaser Image">
-  </section>
-
-  <section class="content">
-    <h2>Rollout Video</h2>
-
-    <h3>Real-World Robot Manipulation</h3>
-    <div class="slider">
-      <button class="slider-nav left" onclick="slideReal(-1)">&#8592;</button>
-      <button class="slider-nav right" onclick="slideReal(1)">&#8594;</button>
-      <div class="slider-track" id="real-slider">
-        <div class="slide">
-          <div class="task-header">Task: stack purple cup on green cup</div>
-          <div class="result-grid">
-            <div class="item">
-              <h4>Baseline FP</h4>
-              <video src="assets/real1_fp.mp4" autoplay muted loop></video>
-              <div class="result success">Success</div>
-            </div>
-            <div class="item">
-              <h4>PTQ W4</h4>
-              <video src="assets/real1_ptq.mp4" autoplay muted loop></video>
-              <div class="result fail">Failed to pick up the purple cup</div>
-            </div>
-            <div class="item">
-              <h4>SQIL W4 (Ours)</h4>
-              <video src="assets/real1_sqil.mp4" autoplay muted loop></video>
-              <div class="result success">Success</div>
-            </div>
-          </div>
-        </div>
-        <div class="slide">
-          <div class="task-header">Task: put eggplant into pot</div>
-          <div class="result-grid">
-            <div class="item">
-              <h4>Baseline FP</h4>
-              <video src="assets/real2_fp.mp4" autoplay muted loop></video>
-              <div class="result success">Success</div>
-            </div>
-            <div class="item">
-              <h4>PTQ W4</h4>
-              <video src="assets/real2_ptq.mp4" autoplay muted loop></video>
-              <div class="result fail">Failed to pick up the eggplant</div>
-            </div>
-            <div class="item">
-              <h4>SQIL W4 (Ours)</h4>
-              <video src="assets/real2_sqil.mp4" autoplay muted loop></video>
-              <div class="result success">Success</div>
-            </div>
-          </div>
-        </div>
+  <section class="grid-section">
+    <h2>LIBERO-Long Task: put the black bowl in the drawer</h2>
+    <div class="video-grid">
+      <div class="item">
+        <h3>Baseline FP</h3>
+        <video controls width="100%">
+          <source src="assets/fp.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+      <div class="item">
+        <h3>PTQ W4</h3>
+        <video controls width="100%">
+          <source src="assets/ptq.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed to put into the drawer</p>
+      </div>
+      <div class="item">
+        <h3>QAT W4</h3>
+        <video controls width="100%">
+          <source src="assets/qat.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed to put the bowl upright into the drawer</p>
+      </div>
+      <div class="item">
+        <h3>SQIL W4 (Ours)</h3>
+        <video controls width="100%">
+          <source src="assets/sqil.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
       </div>
     </div>
-
-    <h3>Autonomous Driving</h3>
-    <div class="autonomous-driving">
-      <img src="assets/driving_baseline.png" alt="Driving Baseline">
-      <img src="assets/driving_qat.png" alt="Driving QAT">
-      <img src="assets/driving_sqil.png" alt="Driving SQIL">
-    </div>
-
-    <h2>Demo Video</h2>
-    <video controls width="100%">
-      <source src="assets/demo.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
-
-    <h2>BibTeX</h2>
-    <pre>
-@inproceedings{park2025sqil,
-  title={Saliency-aware Quantized Imitation Learning},
-  author={Park, Seongmin and ...},
-  booktitle={ICCV},
-  year={2025}
-}
-    </pre>
   </section>
 
-  <footer>
-    <p>&copy; 2025 Seongmin Park, VLA Lab</p>
-  </footer>
+  <section class="grid-section">
+    <h2>LIBERO-Spatial Task: pick up the black bowl and place on plate</h2>
+    <div class="video-grid">
+      <div class="item">
+        <h3>Baseline FP</h3>
+        <video controls width="100%">
+          <source src="assets/spatial_fp.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+      <div class="item">
+        <h3>PTQ W4</h3>
+        <video controls width="100%">
+          <source src="assets/spatial_ptq.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed to find the black bowl</p>
+      </div>
+      <div class="item">
+        <h3>QAT W4</h3>
+        <video controls width="100%">
+          <source src="assets/spatial_qat.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed to pick up the black bowl</p>
+      </div>
+      <div class="item">
+        <h3>SQIL W4 (Ours)</h3>
+        <video controls width="100%">
+          <source src="assets/spatial_sqil.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+    </div>
+  </section>
 
-  <script>
-    let realIndex = 0;
-    function slideReal(dir) {
-      realIndex = Math.max(0, Math.min(1, realIndex + dir));
-      document.getElementById('real-slider').style.transform = `translateX(-${100 * realIndex}%)`;
-    }
-  </script>
-</body>
-</html>
+  <section class="grid-section">
+    <h2>LIBERO-Object Task: pick up cream cheese and place in basket</h2>
+    <div class="video-grid">
+      <div class="item">
+        <h3>Baseline FP</h3>
+        <video controls width="100%">
+          <source src="assets/object_fp.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+      <div class="item">
+        <h3>PTQ W4</h3>
+        <video controls width="100%">
+          <source src="assets/object_ptq.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed due to no attempt to pick up the cream cheese</p>
+      </div>
+      <div class="item">
+        <h3>QAT W4</h3>
+        <video controls width="100%">
+          <source src="assets/object_qat.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed to pick up the cream cheese precisely</p>
+      </div>
+      <div class="item">
+        <h3>SQIL W4 (Ours)</h3>
+        <video controls width="100%">
+          <source src="assets/object_sqil.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="grid-section">
+    <h2>LIBERO-Goal Task: push plate to the front of the stove</h2>
+    <div class="video-grid">
+      <div class="item">
+        <h3>Baseline FP</h3>
+        <video controls width="100%">
+          <source src="assets/goal_fp.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+      <div class="item">
+        <h3>PTQ W4</h3>
+        <video controls width="100%">
+          <source src="assets/goal_ptq.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed due to inaccurate push control</p>
+      </div>
+      <div class="item">
+        <h3>QAT W4</h3>
+        <video controls width="100%">
+          <source src="assets/goal_qat.mp4" type="video/mp4">
+        </video>
+        <p class="caption fail">Failed due to collision with cream cheese</p>
+      </div>
+      <div class="item">
+        <h3>SQIL W4 (Ours)</h3>
+        <video controls width="100%">
+          <source src="assets/goal_sqil.mp4" type="video/mp4">
+        </video>
+        <p class="caption success">Success</p>
+      </div>
+    </div>
+  </section>
