@@ -4,6 +4,41 @@
   <meta charset="UTF-8">
   <title>SQIL: Saliency-aware Quantized Imitation Learning</title>
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    .video-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5em;
+      margin-top: 1em;
+    }
+    .item {
+      text-align: center;
+    }
+    .caption {
+      margin-top: 0.5em;
+      padding: 0.4em;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+    .caption.success {
+      background-color: #fef2e0;
+      color: green;
+    }
+    .caption.fail {
+      background-color: #fdeaea;
+      color: red;
+    }
+    .rollout-section {
+      margin-top: 3em;
+    }
+    .subtask {
+      font-size: 1em;
+      font-weight: normal;
+      color: #555;
+      margin-top: -1em;
+      margin-bottom: 1em;
+    }
+  </style>
 </head>
 <body>
   <header class="header">
@@ -31,45 +66,43 @@
       <li>State importance via perturbation saliency</li>
       <li>Robust generalization across simulation and real-world tasks</li>
     </ul>
-  <section class="grid-section">
-    <h2>Task: put the black bowl in the drawer</h2>
-    <div class="video-grid">
-      <div class="item">
-        <h3>Baseline FP</h3>
-        <video autoplay muted loop playsinline width="100%">
-          <source src="assets/fp.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
-      </div>
-      <div class="item">
-        <h3>PTQ W4</h3>
-        <video autoplay muted loop playsinline width="100%">
-          <source src="assets/ptq.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed to put into the drawer</p>
-      </div>
-      <div class="item">
-        <h3>QAT W4</h3>
-        <video autoplay muted loop playsinline width="100%">
-          <source src="assets/qat.mp4" type="video/mp4">
-        </video>
-        <p class="caption fail">Failed to put the bowl upright into the drawer</p>
-      </div>
-      <div class="item">
-        <h3>SQIL W4 (Ours)</h3>
-        <video autoplay muted loop playsinline width="100%">
-          <source src="assets/sqil.mp4" type="video/mp4">
-        </video>
-        <p class="caption success">Success</p>
-      </div>
-    </div>
-  </section>
 
-    <h2>Demo Video</h2>
-    <video controls width="100%">
-      <source src="assets/demo.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <section class="rollout-section">
+      <h2>Rollout Videos</h2>
+
+      <h3>LIBERO Benchmark</h3>
+      <div class="subtask">Task: put the black bowl in the drawer</div>
+      <div class="video-grid">
+        <div class="item">
+          <h3>Baseline FP</h3>
+          <video autoplay muted loop playsinline width="100%">
+            <source src="assets/fp.mp4" type="video/mp4">
+          </video>
+          <p class="caption success">Success</p>
+        </div>
+        <div class="item">
+          <h3>PTQ W4</h3>
+          <video autoplay muted loop playsinline width="100%">
+            <source src="assets/ptq.mp4" type="video/mp4">
+          </video>
+          <p class="caption fail">Failed to put into the drawer</p>
+        </div>
+        <div class="item">
+          <h3>QAT W4</h3>
+          <video autoplay muted loop playsinline width="100%">
+            <source src="assets/qat.mp4" type="video/mp4">
+          </video>
+          <p class="caption fail">Failed to put the bowl upright into the drawer</p>
+        </div>
+        <div class="item">
+          <h3>SQIL W4 (Ours)</h3>
+          <video autoplay muted loop playsinline width="100%">
+            <source src="assets/sqil.mp4" type="video/mp4">
+          </video>
+          <p class="caption success">Success</p>
+        </div>
+      </div>
+    </section>
 
     <h2>BibTeX</h2>
     <pre>
